@@ -27,22 +27,26 @@ public class LaunchArcRenderer : MonoBehaviour
         velocity = vel;
         angle = ang;
 
-        var arc = CalculateArcArray();
-
-        if (!isGenerated)
+        if (vel != 0)
         {
-            for (int i = 0; i < arc.Length; i++)
+            var arc = CalculateArcArray();
+
+            if (!isGenerated)
             {
-                var predSprite = Instantiate(predictionSpritePrefab, origin + arc[i], Quaternion.identity);
-                predSprites.Add(predSprite);
+                for (int i = 0; i < arc.Length; i++)
+                {
+                    var predSprite = Instantiate(predictionSpritePrefab, origin + arc[i], Quaternion.identity);
+                    predSprites.Add(predSprite);
+                }
+
+                isGenerated = true;
             }
-
-            isGenerated = true;
-        } else
-        {
-            for (int i = 0; i < predSprites.Count; i++)
+            else
             {
-                predSprites[i].transform.position = origin + arc[i];
+                for (int i = 0; i < predSprites.Count; i++)
+                {
+                    predSprites[i].transform.position = origin + arc[i];
+                }
             }
         }
     }
@@ -65,7 +69,7 @@ public class LaunchArcRenderer : MonoBehaviour
         radianAngle = Mathf.Deg2Rad * angle;
         float maxDistance = (velocity * velocity * Mathf.Sin(2 * radianAngle)) / g;
 
-        for (int i = 0; i <= resolution / 2; i++)
+        for (int i = 0; i <= resolution / 3; i++)
         {
             float t = (float)i / (float)resolution;
             arcArray[i] = CalculateArcPoint(t, maxDistance);

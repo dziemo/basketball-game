@@ -1,15 +1,19 @@
-﻿using System.Collections;
+﻿using ScriptableObjectArchitecture;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
-    public float maxThrow = 50f;
+    public GameEvent ballDestroyed;
 
+    public float maxThrow = 50f;
+    
     Camera cam;
     Rigidbody2D rb;
     Vector2 anchorPos;
     LaunchArcRenderer launchArcRenderer;
+    Collider2D coll;
 
     bool isLaunched = false;
 
@@ -19,6 +23,8 @@ public class BallController : MonoBehaviour
         launchArcRenderer = GetComponent<LaunchArcRenderer>();
         rb = GetComponent<Rigidbody2D>();
         rb.isKinematic = true;
+        coll = GetComponent<Collider2D>();
+        coll.enabled = false;
     }
 
     void Update()
@@ -37,9 +43,11 @@ public class BallController : MonoBehaviour
             else if (Input.GetMouseButtonUp(0))
             {
                 rb.isKinematic = false;
+                coll.enabled = true;
                 rb.velocity = (anchorPos - currMousePos).normalized * Mathf.Clamp(Vector2.Distance(anchorPos, currMousePos) * 10f, 0f, maxThrow);
                 isLaunched = true;
                 launchArcRenderer.DisableArc();
+                ballDestroyed.Raise();
             }
         }
 
