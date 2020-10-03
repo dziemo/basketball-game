@@ -8,6 +8,7 @@ public class BallController : MonoBehaviour
     public GameEvent ballDestroyed;
 
     public float maxThrow = 50f;
+    public float forceMultiplier = 10f;
     
     Camera cam;
     Rigidbody2D rb;
@@ -42,9 +43,12 @@ public class BallController : MonoBehaviour
             }
             else if (Input.GetMouseButtonUp(0))
             {
+                var force = Vector2.Distance(anchorPos, currMousePos);
+
                 rb.isKinematic = false;
                 coll.enabled = true;
-                rb.velocity = (anchorPos - currMousePos).normalized * Mathf.Clamp(Vector2.Distance(anchorPos, currMousePos) * 10f, 0f, maxThrow);
+                rb.velocity = (anchorPos - currMousePos).normalized * Mathf.Clamp(force * forceMultiplier, 0f, maxThrow);
+                rb.MoveRotation(forceMultiplier * Random.Range(-2, 2));
                 isLaunched = true;
                 launchArcRenderer.DisableArc();
                 ballDestroyed.Raise();
