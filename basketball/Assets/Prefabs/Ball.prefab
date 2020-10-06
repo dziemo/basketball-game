@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3667048164239294097}
   - component: {fileID: 3667048164239294098}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: BallGFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,9 +94,9 @@ GameObject:
   - component: {fileID: 3667048164434182927}
   - component: {fileID: 3667048164434183153}
   - component: {fileID: 4459525335215096183}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Ball
-  m_TagString: Untagged
+  m_TagString: Ball
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -165,8 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 13595669026caaa4fac346a3e861a8a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ballDestroyed: {fileID: 11400000, guid: c2039f4970040b4439e745f490f06f0c, type: 2}
+  ballLaunched: {fileID: 11400000, guid: c2039f4970040b4439e745f490f06f0c, type: 2}
+  ballDestroyed: {fileID: 11400000, guid: c491a57dd75285f419637886ac5198e5, type: 2}
+  ballsLeft: {fileID: 11400000, guid: a374c1dea232aac4c80c9af8f96fdd8c, type: 2}
   maxThrow: 30
+  forceMultiplier: 10
 --- !u!114 &4459525335215096183
 MonoBehaviour:
   m_ObjectHideFlags: 0

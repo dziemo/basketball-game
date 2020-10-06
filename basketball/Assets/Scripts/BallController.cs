@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class BallController : MonoBehaviour
 {
+    public GameEvent ballLaunched;
     public GameEvent ballDestroyed;
+
+    public IntVariable ballsLeft;
 
     public float maxThrow = 50f;
     public float forceMultiplier = 10f;
@@ -17,6 +20,7 @@ public class BallController : MonoBehaviour
     Collider2D coll;
 
     bool isLaunched = false;
+    bool pointScored = false;
 
     private void Start()
     {
@@ -51,7 +55,7 @@ public class BallController : MonoBehaviour
                 rb.MoveRotation(forceMultiplier * Random.Range(-2, 2));
                 isLaunched = true;
                 launchArcRenderer.DisableArc();
-                ballDestroyed.Raise();
+                ballLaunched.Raise();
             }
         }
 
@@ -59,7 +63,18 @@ public class BallController : MonoBehaviour
 
         if (camPos.x < 0 || camPos.x > 1 || camPos.y < 0)
         {
+            if (!pointScored)
+            {
+                ballsLeft.Value--;
+            }
+
+            ballDestroyed.Raise();
             Destroy(gameObject);
         }
+    }
+
+    public void OnPointScored()
+    {
+        pointScored = true;
     }
 }

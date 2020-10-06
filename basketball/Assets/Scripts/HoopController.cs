@@ -6,13 +6,14 @@ using UnityEngine;
 public class HoopController : MonoBehaviour
 {
     public GameEvent pointScored;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    
+    private void OnTriggerExit2D (Collider2D collision)
     {
-        if (collision.attachedRigidbody)
+        if (collision.CompareTag("Ball"))
         {
             if (collision.attachedRigidbody.velocity.y < 0)
             {
+                collision.GetComponent<BallController>().OnPointScored();
                 pointScored.Raise();
             }
         }
