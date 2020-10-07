@@ -57,6 +57,6 @@ public class GameController : MonoBehaviour
     IEnumerator DisplaceHoop ()
     {
         yield return new WaitForSeconds(1f);
-        hoop.transform.position = (Vector2)cam.ViewportToWorldPoint(new Vector3(Random.Range(0.4f, 0.9f), Random.Range(0.1f, 0.75f)));
+        hoop.transform.position = (Vector2)cam.ViewportToWorldPoint(new Vector3(Random.Range(0.35f, 0.85f), Random.Range(0.1f, 0.75f)));
     }
 }
