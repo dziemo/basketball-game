@@ -43,6 +43,7 @@ public class GameController : MonoBehaviour
         //Point celebration
         //Add point
         points.Value++;
+        points.Raise();
 
         if (streak == 3)
         {

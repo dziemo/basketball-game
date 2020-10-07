@@ -11,6 +11,7 @@ public class NumberDisplayer : MonoBehaviour
     private void Start()
     {
         textComponent.text = number.Value.ToString();
+        number.AddListener(OnValueUpdate);
     }
 
     public void OnValueUpdate ()
